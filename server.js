@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-
+const path = require('path');
 const app = express();
 const port = 3000;
 
@@ -15,6 +15,17 @@ const users = [
     { id: "4", name: "Dave", email: "dave@example.com", address: "Paris, France", phone: "666-777-8888" },
     { id: "5", name: "Eve", email: "eve@example.com", address: "Toronto, Canada", phone: "444-555-6666" }
 ];
+
+app.get('/', (req, res) => {
+    console.log("Default home page");
+    // Sending our index.html file as 
+    // response. In path.join() method
+    // __dirname is the directory where
+    // our server.js file is present. In 
+    // this case __dirname is the root
+    // folder of the project.
+    res.sendFile(path.join(__dirname, '/public/index.html'));
+});
 
 // Route to get all users
 app.get("/users", (req, res) => {
@@ -34,5 +45,5 @@ app.get("/users/:id", (req, res) => {
 
 // Start server
 app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+    console.log(`New Server is running on http://localhost:${port}`);
 });
